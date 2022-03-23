@@ -9,11 +9,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
-  API_ID: ${{ secrets.API_ID }}
+  API_ID: ${{ secrets.APP_ID }}
   API_HASH: ${{ secrets.API_HASH }}
   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-  FFMPEG: ${{ secrets.FFMPEG }}
-  OWNER: ${{ secrets.OWNER }}
+  FFMPEG: ${{ secrets.LOG_CHANNEL }}
+  OWNER: ${{ secrets.OWNERS }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -23,7 +23,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -47,7 +52,7 @@ jobs:
         continue-on-error: true
         timeout-minutes: 355
         run: |
-          python3 -m bot
+          python3 start.py
       - name: Loop workflow
         continue-on-error: true
         run: |

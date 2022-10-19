@@ -1,6 +1,5 @@
 aiohttp
 python-decouple
-pyaesni
 psutil
 tgcrypto
 https://github.com/New-dev0/Telethon/archive/Aurium.zip

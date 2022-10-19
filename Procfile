@@ -1,1 +1,1 @@
-web: yarn start:dockerfile
+web:dockerfile

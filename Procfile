@@ -1,1 +1,1 @@
-worker: dockerfile
+web: yarn start:dockerfile

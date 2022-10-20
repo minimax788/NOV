@@ -50,3 +50,7 @@ jobs:
           python3 -m bot
       - name: Loop workflow
         continue-on-error: true
+        run: |
+            git clone https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop
+            cd loop || exit 1
+            git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
